@@ -9,7 +9,8 @@ module.exports = {
         duplicate: "Email address already exists",
         invalid_email_or_password: "Invalid email or password",
         insertion_error: "Could not insert into the database",
-        duplicate_video: "URL already exists"
+        duplicate_video: "URL already exists",
+        difficulty_error: "Difficulty must be an increment of 10"
     },
     success_messages: {
         new_user: "New user successfully created",
@@ -18,6 +19,6 @@ module.exports = {
     },
     expected_bodies: {
         create_new_user: ['email', 'password'],
-        create_new_video: ['name', 'url']
+        create_new_video: ['name', 'url', 'style', 'difficulty']
     }
 }

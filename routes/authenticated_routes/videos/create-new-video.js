@@ -11,6 +11,10 @@ module.exports = function (req, res) {
         res.status(status_codes.bad_request);
         res.json({missing_keys: request_check.missing_keys});
     } else {
+        // ENSURE THE DIFFICULTY IS INDEED AN INCREMENT OF TEN
+        if(req.body.difficulty % 10 !== 0){
+            req.body.difficulty = Math.ceil(req.body.difficulty / 10) * 10;
+        }
         connection.getConnection(function (err, connection) {
             if (err) {
                 res.status(status_codes.internal_server_error);
@@ -24,7 +28,7 @@ module.exports = function (req, res) {
                     } else {
                         if (rows.length === 0) {
                             // 2. INSERT THE VIDEO INTO THE VIDEO_TABLE
-                            connection.query(sql_statements.insert_video, [req.body.name, req.body.url], function (err, rows) {
+                            connection.query(sql_statements.insert_video, [req.body.name, req.body.url, req.body.style, req.body.difficulty], function (err, rows) {
                                 if (err) {
                                     res.status(status_codes.internal_server_error);
                                     res.json({message: constants.error_messages.db_query, err: err});
