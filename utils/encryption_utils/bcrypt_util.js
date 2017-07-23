@@ -38,6 +38,7 @@ module.exports = {
                 } else {
                     callback(null, false);
                 }
+                connection.release();
             });
         });
     }

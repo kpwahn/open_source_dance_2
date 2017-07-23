@@ -40,11 +40,12 @@ router.post('/', bodyParser.json(), function (req, res) {
                                         } else {
                                             if(rows.affectedRows == 1) {
                                                 res.status(status_codes.ok);
-                                                res.json({message: constants.success_messages.insert_video, err: err});
+                                                res.json({message: constants.success_messages.new_user, err: err});
                                             } else {
                                                 res.status(status_codes.ok);
                                                 res.json({message: constants.error_messages.insertion_error, err: err});
                                             }
+                                            connection.release();
                                         }
                                     });
                                 } else {
